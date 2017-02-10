@@ -1,0 +1,25 @@
+<h1>Listing Links</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Original URL</th>
+      <th>IP</th>
+      <th>Hits</th>
+      <th>Tracked URL</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @links.each do |link| %>
+      <tr>
+        <th scope="row"><%= link.original_url %></th>
+        <td><%= link.ip %></td>
+        <% short_link = link.shortened_urls.first%>
+        <td><%= short_link.use_count %></td>
+        <td><%= link_to "#{short_link.unique_key}", shortened_url_path(id: short_link.unique_key)%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New Link', new_default_link_path, class: "btn btn-primary" %>

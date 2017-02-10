@@ -1,0 +1,22 @@
+ <div class="container">
+  <%= form_for @link, url: v1_links_path, method: "POST" do |f| %>
+     <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Title</label>
+        <div class="col-sm-10">
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">URL</label>
+        <div class="col-sm-10">
+          <%= f.text_field :original_url, class: "form-control" %>
+        </div>
+      </div>
+      <%= f.hidden_field :ip, value: request.remote_ip %>
+      <div class="form-group row">
+        <div class="offset-sm-2 col-sm-10">
+          <%= f.submit "Submit",class: "btn btn-primary" %>
+        </div>
+      </div>
+  <% end %>
+</div>
