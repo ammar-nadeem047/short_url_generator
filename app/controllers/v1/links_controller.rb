@@ -23,7 +23,7 @@ class V1::LinksController < V1::BaseController
       if @link.valid?
         Link.transaction do
           @link.save
-          @link.shortened_urls.generate(@link.original_url)
+          @shortened_url = @link.shortened_urls.generate(@link.original_url)  
         end
         format.html { redirect_to default_links_path, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
