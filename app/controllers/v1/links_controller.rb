@@ -23,7 +23,6 @@ class V1::LinksController < V1::BaseController
           @link.save
           @link.shortened_urls.generate(@link.original_url)
         end
-        binding.pry
         format.html { redirect_to default_links_path, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
       else
