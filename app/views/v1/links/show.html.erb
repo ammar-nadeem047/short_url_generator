@@ -1,4 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+	<div>
+	  <h1>Link Detail</h1>
+	  <%= link_to 'Back', default_links_path, class: "btn btn-primary pull-right" %>
+	</div>
 
-<%= link_to 'Edit', edit_link_path(@link) %> |
-<%= link_to 'Back', links_path %>
+	Title: <%= @link.title %><br>
+	Original URL: <a href="<%=@link.original_url%>"><%= @link.original_url %></a><br>
+	<% short_link = @link.shortened_urls.first%>
+	Total Hits: <%= short_link.use_count %><br>
+	Tracked URL: <%= link_to "#{short_link.unique_key}", shortened_url_path(id: short_link.unique_key) %>
+
+	<h1>IP Visits</h1>
+
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>#</th>
+	      <th>IP</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<% @short_url_trackings.each_with_index do |track, i| %>
+		    <tr>
+		      <th scope="row"><%= i+1 %></th>
+		      <th><%= track.client_ip %></th>
+		  <%end%>
+	  </tbody>
+	</table>
+
+</div>

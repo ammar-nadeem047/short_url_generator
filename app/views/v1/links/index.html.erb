@@ -1,6 +1,6 @@
 <div class="container">
 <div>
-  <h1>Listing Links</h1>
+  <h1>Dashboard</h1>
   <%= link_to 'New Link', new_default_link_path, class: "btn btn-primary pull-right" %>
 </div>
 <table class="table table-striped">
@@ -17,7 +17,7 @@
   <tbody>
     <% @links.each do |link| %>
       <tr>
-        <th scope="row"><%= link.title %></th>
+        <th scope="row"><%= link_to "#{link.title}", default_link_path(link) %></th>
         <th><%= link.original_url %></th>
         <td><%= link.ip %></td>
         <% short_link = link.shortened_urls.first%>

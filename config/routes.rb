@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     root 'links#new'
     resources :links
   end
-  get '/:id' => "shortener/shortened_urls#show", as: :shortened_url
+  get '/:id' => "shortened_urls#show", as: :shortened_url
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

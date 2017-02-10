@@ -6,6 +6,8 @@ class V1::LinksController < V1::BaseController
   end
 
   def show
+    @shortened_url = @link.shortened_urls.first
+    @short_url_trackings = ShortUrlTracking.short_url(@shortened_url.id)
   end
 
   def new

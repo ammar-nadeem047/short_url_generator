@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210124653) do
+ActiveRecord::Schema.define(version: 20170210134532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20170210124653) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "title"
+  end
+
+  create_table "short_url_trackings", force: :cascade do |t|
+    t.integer  "shortened_url_id"
+    t.string   "client_ip"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "shortened_urls", force: :cascade do |t|
