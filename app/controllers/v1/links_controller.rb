@@ -3,6 +3,10 @@ class V1::LinksController < V1::BaseController
 
   def index
     @links = Link.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @links }
+    end    
   end
 
   def show
@@ -18,7 +22,7 @@ class V1::LinksController < V1::BaseController
   end
 
   def create
-    @link = Link.new(link_params)
+    @link = Link.new(link_params.merge({ip: request.remote_ip}))
     respond_to do |format|
       if @link.valid?
         Link.transaction do
@@ -26,7 +30,7 @@ class V1::LinksController < V1::BaseController
           @shortened_url = @link.shortened_urls.generate(@link.original_url)  
         end
         format.html { redirect_to default_links_path, notice: 'Link was successfully created.' }
-        format.json { render :show, status: :created, location: @link }
+        format.json { render json: @link }
       else
         format.html { render :new }
         format.json { render json: @link.errors, status: :unprocessable_entity }
@@ -60,6 +64,6 @@ class V1::LinksController < V1::BaseController
     end
 
     def link_params
-      params.fetch(:link, {}).permit(:original_url, :title, :ip)
+      params.fetch(:link, {}).permit(:original_url, :title)
     end
 end
